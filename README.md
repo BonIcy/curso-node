@@ -7,26 +7,20 @@ Paso 1: Clonar el Repositorio
 
 Comienza clonando este repositorio en tu máquina local usando el siguiente comando:
 
-bash
-
-git clone https://github.com/asynkDF/curso-node
+    git clone https://github.com/asynkDF/curso-node
 
 Paso 2: Instalar Dependencias
 
 Navega al directorio del proyecto y ejecuta este comando para instalar las dependencias necesarias:
-
-bash
 
     cd curso-node
     npm install slugify
     npm install -D nodemon
 
 Esto instalará automáticamente las dependencias listadas en el archivo package.json.
+
 Paso 3: Ejecutar el Servidor
-
-Inicia el servidor ejecutando este comando:
-
-    bash
+Inicia el servidor ejecutando este comando:    
 
     npm start
 
