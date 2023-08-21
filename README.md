@@ -13,23 +13,24 @@ git clone https://github.com/asynkDF/curso-node
 
 Paso 2: Instalar Dependencias
 
-Navega al directorio del proyecto y ejecuta el siguiente comando para instalar las dependencias necesarias:
-
-bash
-cd curso-node (en mi caso)
-npm install slugify
-npm i - D nodemon
-
-Esto instalará las dependencias listadas en el archivo package.json.
-Paso 3.:Ejecutar el Servidor
-
-Inicia el servidor ejecutando el siguiente comando:
+Navega al directorio del proyecto y ejecuta este comando para instalar las dependencias necesarias:
 
 bash
 
-npm start
+    cd curso-node
+    npm install slugify
+    npm install -D nodemon
 
-Esto iniciará el servidor utilizando nodemon, que automáticamente reiniciará el servidor cuando detecte cambios en el código.
+Esto instalará automáticamente las dependencias listadas en el archivo package.json.
+Paso 3: Ejecutar el Servidor
+
+Inicia el servidor ejecutando este comando:
+
+    bash
+
+    npm start
+
+El servidor utilizará nodemon, que reiniciará automáticamente el servidor cuando detecte cambios en el código.
 
 Paso 4: Acceder a la Aplicación
 
