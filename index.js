@@ -2,9 +2,17 @@ let fs = require('fs');
 let http = require('http');
 let url = require('url');
 let slugify = require('slugify');
-let replaceTemplate = require('./modules/replaceTemplate');
+let replaceTemplate = require('./modules/replaceTemplate'); //módulo local
 
-/////////////////////////////////
+// ------------------ CONCEPTOS ------------------
+
+//.prettierrc : como se tiene en 'singleQuote' formateará el código utilizando comillas simples en lugar de comillas dobles para representar strings.
+// fs.writeFile : escribir datos en un archivo de manera asíncrona
+//fs.readFileSync : sirve para leer el contenido de un archivo de manera síncrona, lo que significa que el programa se bloqueará hasta que se complete la operación de lectura
+// writeHead : usado para escribir encabezados (headers) de respuesta HTTP en la respuesta que se envía al cliente después de recibir una solicitud HTTP. 
+// __dirname : variable global proporcionada por node que contiene la ruta del directorio en el que se encuentra el archivo actual
+
+// ------------------ ARCHIVOS ------------------
 // FILES
 
 // Blocking, synchronous way
@@ -30,9 +38,9 @@ let replaceTemplate = require('./modules/replaceTemplate');
 //   });
 // });
 // console.log('Will read file!');
+// ------------------ CREANDO EL SERVER ------------------
 
-/////////////////////////////////
-// SERVER
+// obtener los archivos de plantillas HTML y los datos json requeridos
 let tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   'utf-8'
@@ -48,14 +56,15 @@ let tempProduct = fs.readFileSync(
 
 let data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 let dataObj = JSON.parse(data);
-
+// array de slugs (versiones formateadas para URL, como endpoints) para cada producto
 let slugs = dataObj.map(el => slugify(el.productName, { lower: true }));
 console.log(slugs);
-
+// Creando el server HTTP
 let server = http.createServer((req, res) => {
   let { query, pathname } = url.parse(req.url, true);
+  // ------ Manejo de rutas ------
 
-  // Overview page
+  // overview page
   if (pathname === '/' || pathname === '/overview') {
     res.writeHead(200, {
       'Content-type': 'text/html'
@@ -65,7 +74,7 @@ let server = http.createServer((req, res) => {
     let output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
     res.end(output);
 
-    // Product page
+    // product page
   } else if (pathname === '/product') {
     res.writeHead(200, {
       'Content-type': 'text/html'
@@ -74,14 +83,14 @@ let server = http.createServer((req, res) => {
     let output = replaceTemplate(tempProduct, product);
     res.end(output);
 
-    // API
+    // api
   } else if (pathname === '/api') {
     res.writeHead(200, {
       'Content-type': 'application/json'
     });
     res.end(data);
 
-    // Not found
+    // not found
   } else {
     res.writeHead(404, {
       'Content-type': 'text/html',
@@ -90,7 +99,7 @@ let server = http.createServer((req, res) => {
     res.end('<h1>Page not found!</h1>');
   }
 });
-
+//iniciar el server
 server.listen(8000, '127.0.0.1', () => {
-  console.log('Listening to requests on port 8000');
+  console.log('Server corriendose en puerto 8000');
 });
