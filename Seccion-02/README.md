@@ -19,7 +19,6 @@ Navega al directorio del proyecto y ejecuta este comando para instalar las depen
 
 Esto instalará automáticamente las dependencias listadas en el archivo package.json.
 
-Paso 3: Ejecutar el Servidor
 Inicia el servidor ejecutando este comando:    
 
     npm start
